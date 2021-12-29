@@ -1,43 +1,53 @@
-import React from "react";
+import React , {Component} from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { incNumber, decNumber } from "../action/actions.js";
-import styles from "./style.js";
 
-function Home() {
-  const mystate = useSelector((state) => {
-    state;
-  });
-  const dispatch = useDispatch();
-  console.log(
-    useSelector((state) => {
-      state;
-    }),
-    mystate,
-    "home page"
-  );
+import styles from "./style.js";
+import {connect} from 'react-redux'
+import {increaseNumberAction,decreaseNumberAction}  from '../MyAssets/index'
+import { SafeAreaView } from "react-native-safe-area-context";
+
+class Home extends Component{
+  render() {
+    const para = 10;
   return (
     <View>
-      <Text style={styles.head}>Counter</Text>
+      <Text style={styles.head}>{this.props.gettech}</Text>
       <View style={styles.main}>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => dispatch(incNumber())}
+          onPress={()=>{this.props.increaseNumber(para)}}
         >
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
-        <TextInput placeholder="0" style={styles.Input} value={mystate} />
+        <Text style = {styles.countText}>{this.props.Numbers}</Text>
         <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText} onPress={() => dispatch(decNumber())}>-</Text>
+          <Text style={styles.btnText} onPress={()=>{this.props.decreaseNumber()}} >-</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
+  }
 }
 
-export default Home;
+const mapStateToProps=(state)=>{
+  return{
+    Numbers:state.Number,
+    gettech : state.gettech
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+ 
+      return{
+        increaseNumber:(para)=>{dispatch(increaseNumberAction(para))},
+        decreaseNumber:()=>{dispatch(decreaseNumberAction())}
+      }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
+

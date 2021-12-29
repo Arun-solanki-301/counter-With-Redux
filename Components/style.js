@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native'
-import React from 'react';
 const styles = StyleSheet.create({
     main: {
       marginTop: 10,
@@ -13,6 +12,7 @@ const styles = StyleSheet.create({
       fontSize: 32,
       textAlign: "center",
       marginVertical: 15,
+      marginTop : 50
     },
     Input: {
       borderWidth: 2,
@@ -30,10 +30,13 @@ const styles = StyleSheet.create({
       textAlign: "center",
     },
     btnText: {
-      fontSize: 25,
+      fontSize: 50,
       color: "#fff",
-      marginTop: -10,
-      marginLeft: 2,
-    },
+      marginTop: -20,
+      marginLeft: -5,
+    }, 
+    countText : {
+      fontSize : 45,
+    }
   });
   export default styles;
